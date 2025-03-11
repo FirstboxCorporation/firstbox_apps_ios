@@ -1,0 +1,57 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+
+/*
+buildscript {
+    ext.kotlin_version = '1.8.10' // أو أحدث إصدار مستقر
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://mvnrepository.com/artifact/io.flutter/flutter_embedding_debug' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.4' // أو أحدث إصدار
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://storage.googleapis.com/download.flutter.io' }
+        maven { url 'https://mvnrepository.com/artifact/io.flutter/flutter_embedding_debug' }
+        // https://mvnrepository.com/artifact/io.flutter/flutter_embedding_debug
+        //implementation("io.flutter:flutter_embedding_debug:1.0.0-dbec018f4d83ae4b7b97eb8c5a066c61832e12df")
+
+    }
+}
+
+rootProject.setBuildDir("../build")
+
+subprojects {
+    project.buildDir = "${rootProject.getBuildDir()}/${project.name}"
+    project.evaluationDependsOn(":app") // تأكد من أن المشروع الفرعي يعتمد على تطبيقك
+}
+
+// إضافة مهام لتنظيف المشروع
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+*/
